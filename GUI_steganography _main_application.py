@@ -2,7 +2,7 @@ import tkinter as tk
 from tkfilebrowser import askopenfilename, asksaveasfilename
 from PIL import ImageTk, Image
 import cv2
-import main_app
+import pixel_modify
 import Encrypt
 
 MIN_WIDTH = 400
@@ -163,7 +163,7 @@ class Steganography:
         print(str(self.data))
         print(str(image))
         new_file = self.save_file_var.get()
-        data_ret = main_app.encode(image, self.data, new_file, flag=self.flag)
+        data_ret = pixel_modify.encode(image, self.data, new_file, flag=self.flag)
         string = "Actual Data : {}\nEncoded String : {}".format(self.data_temp, data_ret)
         self.encode_label_var.set(string)
         self.decode_label_var.set('')
@@ -172,7 +172,7 @@ class Steganography:
     def decode_img(self):
         self.key = self.encrypt_var1.get()
         img = self.text2_var.get()
-        decoded_out = main_app.decode(img)
+        decoded_out = pixel_modify.decode(img)
         decrypt_out = Encrypt.encrypt(str(decoded_out), -int(self.key))
         string = "Decrypted String : {}\nDecoded String : {}".format(decrypt_out, decoded_out)
         self.decode_label_var.set(string)
